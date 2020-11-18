@@ -5,26 +5,26 @@ import Col from "./Col";
 // import Card from "./Card";
 import SearchForm from "./SearchForm";
 import Jumbotron from "./Jumbotron";
-// import Table from "./Table";
+import Table from "./Table";
 // import MovieDetail from "./MovieDetail";
-import Search from "../utils/API";
+import API from "../utils/API";
 
 class TableContainer extends Component {
   state = {
-    result: {},
+    result: [],
     search: ""
   };
 
-  // When this component mounts, search for the movie "The Matrix"
+  // When this component mounts, get the employees
   componentDidMount() {
     this.getEmployees();
   }
 
   getEmployees = () => {
-    Search()
+    API.search()
       .then(res => {
-        this.setState({ result: res.data })
-        console.log(res.json);
+        this.setState({ result: res.data.results })
+        console.log(this.state.result);
       })
       .catch(err => console.log(err));
   };
@@ -46,18 +46,18 @@ class TableContainer extends Component {
   render() {
     return (
       <Container>
-            <Jumbotron heading="Employee Directory"/>
-            <Row>
-              <Col size="lg-12">
-              <SearchForm />
-              </Col>
-            </Row>
+        <Jumbotron heading="Employee Directory" />
+        <Row>
+          <Col size="lg-12">
+            <SearchForm />
+          </Col>
+        </Row>
 
-            <Row>
-            <Col size="lg-12">
-              {/* <Table employees={this.state.result}/> */}
-            </Col>
-            </Row>
+        <Row>
+          <Col size="lg-12">
+            <Table employees={this.state.result} />
+          </Col>
+        </Row>
       </Container>
     );
   }

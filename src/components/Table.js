@@ -14,16 +14,21 @@ function Table(props) {
         </tr>
       </thead>
       <tbody>
-        {props.employees.map(employee => (
-          <tr>
-            <td>{employee.picture.medium}</td>
-            <td>{employee.name.first}</td>
-            <td>{employee.name.last}</td>
-            <td>{employee.phone}</td>
-            <td>{employee.email}</td>
-            <td>{employee.dob}</td>
-          </tr>
-        ))}
+        {
+          props.employees.map((employee, index) => {
+            let date = new Date(employee.dob.date);
+            let newDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+            return (
+              <tr key={index}>
+                <td><img src={employee.picture.medium} alt="Employee"></img></td>
+                <td>{employee.name.first}</td>
+                <td>{employee.name.last}</td>
+                <td>{employee.phone}</td>
+                <td>{employee.email}</td>
+                <td>{newDate}</td>
+              </tr>)
+          })
+        }
       </tbody>
     </table>
   );
