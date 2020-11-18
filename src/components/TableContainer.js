@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import Container from "./Container";
 import Row from "./Row";
 import Col from "./Col";
-import Card from "./Card";
+// import Card from "./Card";
 import SearchForm from "./SearchForm";
 import Jumbotron from "./Jumbotron";
-import MovieDetail from "./MovieDetail";
-import API from "../utils/API";
+// import Table from "./Table";
+// import MovieDetail from "./MovieDetail";
+import Search from "../utils/API";
 
 class TableContainer extends Component {
   state = {
@@ -14,16 +15,19 @@ class TableContainer extends Component {
     search: ""
   };
 
-  // // When this component mounts, search for the movie "The Matrix"
-  // componentDidMount() {
-  //   this.searchMovies("The Matrix");
-  // }
+  // When this component mounts, search for the movie "The Matrix"
+  componentDidMount() {
+    this.getEmployees();
+  }
 
-  // searchMovies = query => {
-  //   API.search(query)
-  //     .then(res => this.setState({ result: res.data }))
-  //     .catch(err => console.log(err));
-  // };
+  getEmployees = () => {
+    Search()
+      .then(res => {
+        this.setState({ result: res.data })
+        console.log(res.json);
+      })
+      .catch(err => console.log(err));
+  };
 
   // handleInputChange = event => {
   //   const value = event.target.value;
@@ -44,7 +48,15 @@ class TableContainer extends Component {
       <Container>
             <Jumbotron heading="Employee Directory"/>
             <Row>
-              
+              <Col size="lg-12">
+              <SearchForm />
+              </Col>
+            </Row>
+
+            <Row>
+            <Col size="lg-12">
+              {/* <Table employees={this.state.result}/> */}
+            </Col>
             </Row>
       </Container>
     );
