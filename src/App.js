@@ -1,8 +1,8 @@
 import React from "react";
-import TableContainer from "./components/TableContainer";
+import Page from "./components/Page";
 
 function App() {
-  return <TableContainer />;
+  return <Page />;
 }
 
 export default App;

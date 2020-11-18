@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import Container from "./Container";
 import Row from "./Row";
 import Col from "./Col";
-// import Card from "./Card";
-import SearchForm from "./SearchForm";
+import Search from "./Search";
 import Jumbotron from "./Jumbotron";
 import Table from "./Table";
-// import MovieDetail from "./MovieDetail";
 import API from "../utils/API";
 
-class TableContainer extends Component {
+class Page extends Component {
   state = {
     result: [],
     search: ""
@@ -29,41 +27,44 @@ class TableContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  // handleInputChange = event => {
-  //   const value = event.target.value;
-  //   const name = event.target.name;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+  handleInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  };
 
-  // // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the OMDB API for the value of `this.state.search`
   // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   this.searchMovies(this.state.search);
-  // };
+  //   // Number 13 is the "Enter" key on the keyboard
+  //   if (event.keyCode === 13) {
+  //     // Cancel the default action, if needed
+  //     event.preventDefault();
+  //   };
+  // }
 
-  render() {
-    return (
-      <Container>
-        <Jumbotron heading="Employee Directory" />
-        <Row>
-          <Col size="lg-12">
-            <SearchForm />
-          </Col>
-        </Row>
+    render() {
+      return (
+        <Container>
+          <Jumbotron heading="Employee Directory" />
+          <Row>
+            <Col size="lg-12">
+              <Search />
+            </Col>
+          </Row>
 
-        <Row>
-          <Col size="lg-12">
-            <Table employees={this.state.result} />
-          </Col>
-        </Row>
-      </Container>
-    );
+          <Row>
+            <Col size="lg-12">
+              <Table employees={this.state.result} />
+            </Col>
+          </Row>
+        </Container>
+      );
+    }
   }
-}
 
-export default TableContainer;
+  export default Page;
 
 
 // render() {

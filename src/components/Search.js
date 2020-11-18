@@ -1,8 +1,7 @@
 import React from "react";
 
-function SearchForm(props) {
+function Search(props) {
   return (
-    <form>
       <div className="form-group">
         <input
           onChange={props.handleInputChange}
@@ -13,8 +12,7 @@ function SearchForm(props) {
           id="search"
         />
       </div>
-    </form>
   );
 }
 
-export default SearchForm;
+export default Search;
