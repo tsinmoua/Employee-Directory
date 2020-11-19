@@ -10,7 +10,8 @@ import API from "../utils/API";
 class Page extends Component {
   state = {
     result: [],
-    search: ""
+    search: "",
+    searchResult: []
   };
 
   // When this component mounts, get the employees
@@ -34,30 +35,52 @@ class Page extends Component {
     this.setState({
       [name]: value
     }, () => {
-      console.log(this.state.search);
+      // console.log(this.state.search);
+      this.searching()
     });
   };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
-  // handleFormSubmit = event => {
-  //   // Number 13 is the "Enter" key on the keyboard
-  //   if (event.keyCode === 13) {
-  //     // Cancel the default action, if needed
-  //     event.preventDefault();
-  //   };
+  // onKeyDown = event => {
+  //   if (event.keyCode === 8) {
+  //     console.log('delete');
+  //     const value = event.target.value;
+  //     const name = event.target.name;
+
+  //     this.setState({
+  //       [name]: value
+  //     }, () => {
+
+
+  //     });
+
+  //     console.log(this.state.search);
+
+  //       const resultFromAPI = this.state.result;
+  //       const searchTerm = this.state.search
+
+  //       const checkFirstName = resultFromAPI.filter((employee) =>
+  //         ((employee.name.first).toLowerCase()).includes(searchTerm)
+  //       ).map(filteredName => filteredName)
+
+  //       console.log(checkFirstName);
+
+  //       this.setState({ result: checkFirstName })
+  //   }
   // }
 
   searching = () => {
-    if (this.state.search !== "") {
-      const resultFromAPI = this.state.result;
-      const searchTerm = this.state.search
+    const resultFromAPI = this.state.result;
+    const searchTerm = this.state.search
 
-      const dataSet = resultFromAPI.filter(employeeFirstName =>
-        employeeFirstName.includes(searchTerm)
-      ).map(filteredName => filteredName)
+    console.log(resultFromAPI);
 
-      console.log(dataSet);
-    }
+    const checkFirstName = resultFromAPI.filter((employee) =>
+      ((employee.email).toLowerCase()).includes(searchTerm)
+    )
+    // .map(filteredName => filteredName)
+    // console.log(checkFirstName);
+
+    this.setState({ searchResult: checkFirstName })
   }
 
   render() {
@@ -69,6 +92,7 @@ class Page extends Component {
             <Search
               value={this.state.search}
               handleInputChange={this.handleInputChange}
+              onKeyDown={this.onKeyDown}
             />
           </Col>
         </Row>
@@ -76,7 +100,8 @@ class Page extends Component {
         <Row>
           <Col size="lg-12">
             <Table
-              employees={this.state.result} />
+              // employees={this.state.result} />
+              employees={this.state.search === "" ? this.state.result : this.state.searchResult} />
           </Col>
         </Row>
       </Container>
