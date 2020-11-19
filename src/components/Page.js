@@ -22,7 +22,7 @@ class Page extends Component {
     API.search()
       .then(res => {
         this.setState({ result: res.data.results })
-        console.log(this.state.result);
+        // console.log(this.state.result);
       })
       .catch(err => console.log(err));
   };
@@ -30,8 +30,11 @@ class Page extends Component {
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
+
     this.setState({
       [name]: value
+    }, () => {
+      console.log(this.state.search);
     });
   };
 
@@ -44,27 +47,44 @@ class Page extends Component {
   //   };
   // }
 
-    render() {
-      return (
-        <Container>
-          <Jumbotron heading="Employee Directory" />
-          <Row>
-            <Col size="lg-12">
-              <Search />
-            </Col>
-          </Row>
+  searching = () => {
+    if (this.state.search !== "") {
+      const resultFromAPI = this.state.result;
+      const searchTerm = this.state.search
 
-          <Row>
-            <Col size="lg-12">
-              <Table employees={this.state.result} />
-            </Col>
-          </Row>
-        </Container>
-      );
+      const dataSet = resultFromAPI.filter(employeeFirstName =>
+        employeeFirstName.includes(searchTerm)
+      ).map(filteredName => filteredName)
+
+      console.log(dataSet);
     }
   }
 
-  export default Page;
+  render() {
+    return (
+      <Container>
+        <Jumbotron heading="Employee Directory" />
+        <Row>
+          <Col size="lg-12">
+            <Search
+              value={this.state.search}
+              handleInputChange={this.handleInputChange}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col size="lg-12">
+            <Table
+              employees={this.state.result} />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
+
+export default Page;
 
 
 // render() {

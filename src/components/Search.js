@@ -7,6 +7,7 @@ function Search(props) {
           onChange={props.handleInputChange}
           value={props.value}
           name="search"
+          type="text"
           className="form-control"
           placeholder="Search the Directory..."
           id="search"
