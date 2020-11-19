@@ -11,11 +11,9 @@ class Page extends Component {
   state = {
     result: [],
     search: "",
-    searchResult: []
+    searchResult: [],
+    firstName: []
   };
-
-  // Format API date to MM/DD/YYYY
-  newDate = (date) => new Date(date);
 
   componentDidMount() {
     this.getEmployees();
@@ -41,24 +39,49 @@ class Page extends Component {
     });
   };
 
+  // Format API date to MM/DD/YYYY
+  newDate = (date) => new Date(date);
+
   searching = () => {
     const resultFromAPI = this.state.result;
     const searchTerm = this.state.search
 
     const checkInput =
-      resultFromAPI.filter((employee) => 
+      resultFromAPI.filter((employee) =>
         (
           (employee.name.first).toLowerCase() + " " +
-          (employee.name.last).toLowerCase() + " " + 
+          (employee.name.last).toLowerCase() + " " +
           (employee.phone) + " " +
           (employee.email) + " " +
-          (`${this.newDate(employee.dob.date).getMonth() + 1}/${this.newDate(employee.dob.date).getDate()}/${this.newDate(employee.dob.date).getFullYear()}`)
+          (`${this.newDate(employee.dob.date).getMonth() + 1}
+          /${this.newDate(employee.dob.date).getDate()}
+          /${this.newDate(employee.dob.date).getFullYear()}`)
         ).includes(searchTerm)
       )
     // console.log(checkInput);
 
     this.setState({ searchResult: checkInput })
   }
+
+  sortAscending = () => {
+    console.log("clicked");
+
+  }
+
+  handleSort = event => {
+    event.preventDefault();
+    console.log("clicked");
+    this.setState({ search: "" })
+
+    const resultFromAPI = this.state.result;
+
+    let sortByFirstName = resultFromAPI.sort((a, b) => (a.name.first > b.name.first) ? 1 : -1)
+    console.log(resultFromAPI);
+
+    this.setState({ result: sortByFirstName })
+
+
+  };
 
   render() {
     return (
@@ -69,16 +92,16 @@ class Page extends Component {
             <Search
               value={this.state.search}
               handleInputChange={this.handleInputChange}
-              onKeyDown={this.onKeyDown}
             />
           </Col>
         </Row>
-
+        {/* <Row><button onClick={this.sortAscending}>asc</button></Row> */}
         <Row>
           <Col size="lg-12">
             <Table
-              // employees={this.state.result} />
-              employees={this.state.search === "" ? this.state.result : this.state.searchResult} />
+              employees={this.state.search === "" ? this.state.result : this.state.searchResult}
+              handleSort={this.handleSort}
+            />
           </Col>
         </Row>
       </Container>

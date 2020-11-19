@@ -1,4 +1,5 @@
 import React from "react";
+import SortButtons from "./SortButtons"
 
 function Table(props) {
   return (
@@ -6,8 +7,8 @@ function Table(props) {
       <thead>
         <tr>
           <th scope="col">Image</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
+          <th scope="col">First Name<SortButtons onClick={props.handleSort} /></th>
+          <th scope="col">Last Name<SortButtons onClick={props.handleSort} /></th>
           <th scope="col">Phone #</th>
           <th scope="col">Email Address</th>
           <th scope="col">DOB</th>
