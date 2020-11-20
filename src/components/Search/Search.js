@@ -12,6 +12,7 @@ function Search(props) {
           className="form-control"
           placeholder="Search the Directory..."
           id="search"
+          autoFocus
         />
       </div>
   );

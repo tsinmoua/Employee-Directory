@@ -1,12 +1,12 @@
 import React from "react";
-import { SortButtonASC, SortButtonDESC } from "../SortButtons"
+import { SortButtonASC, SortButtonDESC } from "../SortButtons/SortButtons"
 import "./style.css";
 
 
 function Table(props) {
   return (
     <table className="table table-hover">
-      <thead>
+      <thead className="thead-light">
         <tr>
           <th scope="col">Image</th>
           <th scope="col">First Name

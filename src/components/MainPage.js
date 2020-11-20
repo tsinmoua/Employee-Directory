@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import Container from "./Container/Container";
-import Row from "./Row";
-import Col from "./Col";
-import Search from "./Search";
-import Jumbotron from "./Jumbotron";
+import Row from "./Row/Row";
+import Col from "./Col/Col";
+import Search from "./Search/Search";
+import Jumbotron from "./Jumbotron/Jumbotron";
 import Table from "./Table/Table";
-import API from "../utils/API";
+import SearchAPI from "../utils/API";
 
-class Page extends Component {
+class MainPage extends Component {
   state = {
     result: [],
     search: "",
     searchResult: [],
-    firstName: []
   };
 
   componentDidMount() {
@@ -20,7 +19,7 @@ class Page extends Component {
   }
 
   getEmployees = () => {
-    API.search()
+    SearchAPI()
       .then(res => {
         this.setState({ result: res.data.results })
         // console.log(this.state.result);
@@ -128,7 +127,10 @@ class Page extends Component {
   render() {
     return (
       <Container>
-        <Jumbotron heading="Employee Directory" />
+        <Jumbotron 
+        heading="RANDOMNESS INC" 
+        heading2="Employee Directory" 
+        />
         <Row>
           <Col size="lg-12">
             <Search
@@ -149,4 +151,4 @@ class Page extends Component {
   }
 }
 
-export default Page;
+export default MainPage;

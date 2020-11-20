@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 export function SortButtonASC(props) {
   return <button onClick={props.onClick} className={`btn btn-dark ${props["data-value"]}`} {...props}>

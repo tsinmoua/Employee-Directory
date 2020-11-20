@@ -1,3 +1,16 @@
 table {
     background-color: white;
+    border-radius: 5px !important;
 }
+
+.table thead th {
+    vertical-align: baseline !important;
+    text-align: center;
+}
+
+.table td {
+    vertical-align: middle !important;
+    text-align: center;
+    font-size: 19px;
+}
+
