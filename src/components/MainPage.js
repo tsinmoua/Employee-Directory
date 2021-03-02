@@ -127,9 +127,9 @@ class MainPage extends Component {
   render() {
     return (
       <Container>
-        <Jumbotron 
-        heading="RANDOMNESS INC" 
-        heading2="Employee Directory" 
+        <Jumbotron
+          heading="Employee Directory"
+          heading2=""
         />
         <Row>
           <Col size="lg-12">
